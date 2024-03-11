@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Rock, Paper or Scissors</title>
+</head>
+
+<body>
+    <h1>Rock, Paper or Scissors - Game</h1>
+
+    <script>
+
+function getComputerChoice()
+{   
+    // Esta función devuelve Piedra, Papel o Tijera de manera aleatoria
+    
+      opcion = (Math.trunc((Math.random() * 3))+1).toString();
+
+      
+
+    switch (opcion) 
+    {
+        case "1":
+            opcion = "piedra";
+        break;
+        case "2":
+            opcion = "papel";
+        break;
+        case "3":
+            opcion = "tijera";
+        break;
+        default:
+        console.log("Error");
+    }
+
+    return opcion;
+    
+    
+}
+
+
+function getPlayerChoice()
+{  
+    // Solicitar al usuario que ingrese piedra, papel o tijera
+    var palabra = prompt("Por favor, ingrese su seleccion : Piedra, papel o tijera");
+    palabra = palabra.toLocaleLowerCase();
+        if (palabra != 'piedra' && palabra != 'papel' && palabra != 'tijera' || palabra.length === 0) {
+         // Mostrar un mensaje si el usuario cancela el ingreso
+            alert("Por favor, ingresa una palabra válida");
+            return "Por favor, ingresa una palabra válida";
+        }    
+        else {
+        return palabra;
+        } 
+
+
+}
+
+function playRound(palabra,opcion) {
+  // your code here!
+  console.log(opcion);
+  console.log(palabra);
+  if (palabra === opcion) {
+  resultado = "¡Es un empate!";
+    }
+    else if (palabra === "piedra" && opcion === "tijera") {
+    resultado = "¡Has ganado! Piedra gana a tijera"
+    scoreUsuario = scoreUsuario + 1
+    }    
+    else if (palabra === "papel" && opcion === "piedra"){
+    resultado = "¡Has ganado! Papel gana a piedra"
+    scoreUsuario = scoreUsuario + 1
+    }
+    else if (palabra === "tijera" && opcion === "papel"){
+    resultado = "¡Has ganado! Tijera gana a papel"
+    scoreUsuario = scoreUsuario + 1
+    } 
+    else {
+    resultado = "¡Has perdido!";
+    scorePc = scorePc + 1
+    }
+
+    return resultado;
+}
+
+function playGame(palabra,opcion){
+
+    for (let i = 0; i < 5; i++) {
+        var opcion = getComputerChoice()
+        var palabra = getPlayerChoice()
+        playRound(palabra,opcion);
+    }
+
+    if (scorePc === scoreUsuario) {
+    resultado = "¡Es un empate!";
+    }
+    else if (scorePc < scoreUsuario){
+    resultado = "El usuario ha ganado"
+    } 
+    else {
+    resultado = "¡Has perdido! Intenta de nuevo";
+    }
+    return resultado
+}
+
+var scorePc= 0
+var scoreUsuario = 0
+//var opcion = getComputerChoice()
+//var palabra = getPlayerChoice()
+console.log(playGame())
+console.log( 'El resultado ha sido : Usuario ' + scoreUsuario + ' vs Pc '+scorePc)
+
+    </script>
+</body>
+
+</html>
